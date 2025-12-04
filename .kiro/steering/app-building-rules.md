@@ -19,7 +19,9 @@ You must:
 - Ask clarifying questions and do not move forward with assumptions unless user confirms
 
 ## Server and Testing Requirements
-- Use a single running server to host the application
-- Configure server logging to write to a file
+- The user runs the development server in a separate terminal window
+- DO NOT start or stop the server during task execution
+- The server logs to a file that can be checked for debugging
 - Write a very basic unit test for each feature
 - Run unit tests after each task is completed to verify functionality
+- To verify changes, check the running application in the browser and review dev logs if needed

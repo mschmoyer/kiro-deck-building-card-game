@@ -298,14 +298,28 @@
   - Test requests are logged with correct format
   - _Requirements: Server logging requirement_
 
-- [-] 20. Final integration and testing
+- [-] 20. Verify and enhance deck tracking mechanics
+  - Ensure purchased cards are added to discard pile (not deck)
+  - Verify automatic reshuffle triggers when deck is empty during draw
+  - Test that discard pile is shuffled into deck immediately when needed
+  - Ensure deck and discard counts update correctly in UI
+  - Verify played cards move to discard at end of buy phase
+  - _Requirements: 2.2, 5.2, 5.5_
+
+- [ ]* 20.1 Write unit test for complete deck cycle
+  - Test purchase → discard → reshuffle → draw flow
+  - Test deck count decreases and discard count increases correctly
+  - Test automatic reshuffle when deck empties
+  - _Requirements: 2.2, 5.2, 5.5_
+
+- [ ] 21. Final integration and testing
   - Run all unit tests and ensure they pass
   - Run all property-based tests and ensure they pass
   - Test complete game flow manually
   - Verify all 10 requirements are met
   - Fix any remaining bugs
 
-- [ ]* 20.1 Run full test suite
+- [ ]* 21.1 Run full test suite
   - Execute: npm test
   - Verify all tests pass
   - Check test coverage
