@@ -2,6 +2,8 @@
 
 A coding-themed deck building card game built with Next.js.
 
+![Kiro Deck Builder Screenshot](./ss1.png)
+
 ## Project Structure
 
 ```

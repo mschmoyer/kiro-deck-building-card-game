@@ -17,13 +17,25 @@ export default function ResourceDisplay() {
 
   return (
     <motion.div 
-      className="w-full bg-prey-750 rounded-lg p-4 shadow-lg"
+      className="w-full bg-gray-900 rounded-lg p-4 shadow-lg border border-gray-800"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
       <div className="flex items-center justify-between gap-6 flex-wrap">
-        {/* Resources Section */}
+        {/* Game Title with Logo - Left Side */}
+        <div className="flex items-center gap-3">
+          <img 
+            src="/assets/kiro-logo.png" 
+            alt="Kiro Logo" 
+            className="w-10 h-10 object-contain"
+          />
+          <h1 className="text-2xl font-bold text-white">
+            Kiro <span className="text-purple-500">Deck Builder</span>
+          </h1>
+        </div>
+
+        {/* Resources Section - Center */}
         <div className="flex items-center gap-6">
           {/* Tasks */}
           <motion.div 

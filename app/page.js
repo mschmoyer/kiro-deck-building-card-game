@@ -21,7 +21,7 @@ function GameContent() {
   return (
     <div className="min-h-screen bg-black-900 p-6">
       <div className="max-w-[1600px] mx-auto space-y-6">
-        {/* Resource Display at top */}
+        {/* Resource Display with Title at top */}
         <ResourceDisplay />
         
         {/* Game Board in center */}

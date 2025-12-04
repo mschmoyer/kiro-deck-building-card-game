@@ -298,7 +298,7 @@
   - Test requests are logged with correct format
   - _Requirements: Server logging requirement_
 
-- [-] 20. Verify and enhance deck tracking mechanics
+- [x] 20. Verify and enhance deck tracking mechanics
   - Ensure purchased cards are added to discard pile (not deck)
   - Verify automatic reshuffle triggers when deck is empty during draw
   - Test that discard pile is shuffled into deck immediately when needed

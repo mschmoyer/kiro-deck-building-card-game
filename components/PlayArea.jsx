@@ -37,16 +37,27 @@ export default function PlayArea({ playedCards = [], phase }) {
         Played Cards
       </motion.div>
 
-      {/* Played Cards Grid */}
-      <div className="flex-1 flex items-center justify-center">
+      {/* Played Cards Grid with Background Container */}
+      <motion.div 
+        className="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-900/40 to-gray-800/40 rounded-xl border border-gray-700/30 backdrop-blur-sm p-6"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3, delay: 0.15 }}
+      >
         {playedCards.length === 0 ? (
           <motion.div 
-            className="text-prey-400 text-sm"
+            className="text-prey-300 text-center max-w-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
           >
-            No cards played yet
+            <div className="text-lg font-semibold mb-3 text-white">How to Play</div>
+            <div className="space-y-2 text-sm">
+              <p>🎯 <span className="font-medium">Goal:</span> Score 10+ points in 20 turns</p>
+              <p>🃏 <span className="font-medium">Play Phase:</span> Click cards to play them and gain resources</p>
+              <p>✨ <span className="font-medium">Complete challenges</span> to earn ⭐ points</p>
+              <p>🛒 <span className="font-medium">Buy Phase:</span> Purchase better cards to improve your deck</p>
+            </div>
           </motion.div>
         ) : (
           <div className="flex items-center justify-center gap-4 flex-wrap">
@@ -76,7 +87,7 @@ export default function PlayArea({ playedCards = [], phase }) {
             </AnimatePresence>
           </div>
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

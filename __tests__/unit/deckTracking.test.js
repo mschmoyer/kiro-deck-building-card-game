@@ -190,47 +190,41 @@ describe('Deck Tracking Mechanics', () => {
   });
 
   it('should correctly update deck and discard counts throughout game', () => {
-    // Note: When a card with cardDraw is played, it draws additional cards
-    // This test verifies card conservation excluding card draw effects
-    
-    // Play a card without card draw effect
-    const cardWithoutDraw = gameState.hand.find(c => !c.cardDraw || c.cardDraw === 0);
-    
-    if (!cardWithoutDraw) {
-      // If all cards have draw effects, just verify the basic flow works
-      expect(gameState.playerDeck.length).toBeGreaterThan(0);
-      return;
-    }
+    // Verify deck and discard counts update correctly as cards move through the system
     
     const initialDeckCount = gameState.playerDeck.length;
     const initialHandCount = gameState.hand.length;
-    const initialDiscardCount = gameState.discardPile.length;
     
-    // Total cards should remain constant
-    const totalCards = initialDeckCount + initialHandCount + initialDiscardCount;
-    
+    // Play a card
+    const card = gameState.hand[0];
     gameState = gameReducer(gameState, {
       type: ACTIONS.PLAY_CARD,
-      payload: { cardId: cardWithoutDraw.instanceId }
+      payload: { cardId: card.instanceId }
     });
     
-    // Verify total cards unchanged (hand -1, played +1)
-    let currentTotal = gameState.playerDeck.length + 
-                       gameState.hand.length + 
-                       gameState.discardPile.length + 
-                       gameState.playedCards.length;
-    expect(currentTotal).toBe(totalCards);
+    // Verify hand decreased by 1 and played cards increased by 1
+    expect(gameState.hand.length).toBe(initialHandCount - 1);
+    expect(gameState.playedCards.length).toBe(1);
     
-    // End phases
+    // End play phase
     gameState = gameReducer(gameState, { type: ACTIONS.END_PLAY_PHASE });
+    
+    // Played cards should still be in played area
+    expect(gameState.playedCards.length).toBe(1);
+    
+    // End buy phase - played cards should move to discard
+    const discardBeforeBuyEnd = gameState.discardPile.length;
     gameState = gameReducer(gameState, { type: ACTIONS.END_BUY_PHASE });
     
-    // After ending buy phase, total should still be the same
-    currentTotal = gameState.playerDeck.length + 
-                   gameState.hand.length + 
-                   gameState.discardPile.length + 
-                   gameState.playedCards.length;
-    expect(currentTotal).toBe(totalCards);
+    // Verify played cards moved to discard
+    expect(gameState.playedCards.length).toBe(0);
+    expect(gameState.discardPile.length).toBe(discardBeforeBuyEnd + 1);
+    
+    // Verify new hand was drawn
+    expect(gameState.hand.length).toBe(5);
+    
+    // Verify deck count decreased appropriately
+    expect(gameState.playerDeck.length).toBe(initialDeckCount - 5);
   });
 
   it('should reshuffle discard during new turn draw when deck is empty', () => {
